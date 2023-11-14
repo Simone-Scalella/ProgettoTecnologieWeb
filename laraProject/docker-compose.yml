@@ -1,0 +1,26 @@
+version: '3'
+services:
+  # Container per il server Laravel
+  laravel_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./laravel_project:/var/www/html
+    depends_on:
+      - mysql_db
+
+  # Container per il database MySQL
+  mysql_db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: grp_08_db
+      MYSQL_USER: grp_08
+      MYSQL_PASSWORD: zFlenNqb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
